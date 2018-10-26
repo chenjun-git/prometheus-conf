@@ -26,4 +26,16 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-    - targets: ['localhost:9090']
+    - targets: ['13.112.244.124:9090']
+
+  - job_name: 'ec2-13-112-244-124.ap-northeast-1.compute.amazonaws.com'  # 一定要全局唯一, 采集本机的 metrics，需要在本机安装 node_exporter
+       
+    scrape_interval: 10s           
+    static_configs:
+    - targets: ['13.112.244.124:9100']  # 本机 node_exporter 的 endpoint
+  - job_name: 'umbrella.cpvm7u1uorzr.ap-northeast-1.rds.amazonaws.com'
+    static_configs:
+    - targets: ['13.112.244.124:9104']
+      labels:
+        instance: 'umbrella.cpvm7u1uorzr.ap-northeast-1.rds.amazonaws.com'
+
